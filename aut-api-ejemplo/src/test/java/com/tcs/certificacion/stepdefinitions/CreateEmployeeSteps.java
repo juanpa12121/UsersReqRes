@@ -1,10 +1,9 @@
 package com.tcs.certificacion.stepdefinitions;
 
+import com.tcs.certificacion.models.Employee;
 import com.tcs.certificacion.models.TestData;
-import com.tcs.certificacion.tasks.CreateBody;
-import com.tcs.certificacion.tasks.CreateEmployee;
-import com.tcs.certificacion.tasks.CreateEmployeeV2;
-import com.tcs.certificacion.tasks.DataUpload;
+import com.tcs.certificacion.tasks.*;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,22 +18,15 @@ import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeT
 
 public class CreateEmployeeSteps {
 
-    @Given("Upload the data test")
-    public void uploadTheDataTest(List<Map<String, String>> clientData) {
-        OnStage.theActorInTheSpotlight().wasAbleTo(DataUpload.theData(clientData.get(0)));
+    @DataTableType
+    public Employee employeeEntry(Map<String, String> entry){
+        return new Employee(entry.get("name"),entry.get("job"));
     }
 
-    @When("I create the employee")
-    public void iCreateTheEmployee() {
-        //theActorInTheSpotlight().attemptsTo(CreateEmployee.create(name, job));
-        theActorInTheSpotlight().attemptsTo(CreateBody.sendBody("template/create_employee.json", "create_employee", TestData.getDataTest()));
-        theActorInTheSpotlight().attemptsTo(CreateEmployee.create("api/users", "create_employee" ));
-    }
-
-    //createv2
+    //createv1
     @When("When i create the employee with the data name {string} and {string}")
     public void whenICreateTheEmployeeWithTheDataNameAnd(String name, String job) {
-        theActorInTheSpotlight().attemptsTo(CreateEmployeeV2.create(name, job));
+        theActorInTheSpotlight().attemptsTo(CreateEmployeeV1.create(name, job));
     }
 
     @Then("Return and validate the name {string} of employee")
@@ -44,6 +36,26 @@ public class CreateEmployeeSteps {
                         res -> res.body("name", Matchers.equalTo(name))
         ));
     }
+
+    //@createv2
+    @Given("Upload the data test")
+    public void uploadTheDataTest(List<Map<String, String>> clientData) {
+        OnStage.theActorInTheSpotlight().wasAbleTo(DataUpload.theData(clientData.get(0)));
+    }
+
+    @When("I create the employee")
+    public void iCreateTheEmployee() {
+        //theActorInTheSpotlight().attemptsTo(CreateEmployee.create(name, job));
+        theActorInTheSpotlight().attemptsTo(CreateBody.sendBody("template/create_employee.json", "create_employee", TestData.getDataTest()));
+        theActorInTheSpotlight().attemptsTo(CreateEmployeeV2.create("api/users", "create_employee" ));
+    }
+
+    //@createv3
+    @When("I create the employee with the data")
+    public void iCreateTheEmployeeWithTheData(Employee employee ) {
+        theActorInTheSpotlight().attemptsTo(CreateEmployeeV3.create(employee));
+    }
+
 
 
 }
