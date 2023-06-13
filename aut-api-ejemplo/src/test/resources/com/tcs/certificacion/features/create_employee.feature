@@ -26,7 +26,7 @@ Feature: Create employee
 
   @createv3
   Scenario Outline: Create an employee
-    Given I can query the users api
+    Given I can query the users api "dev"
     When I create the employee with the data
       | name   | job   |
       | <name> | <job> |
