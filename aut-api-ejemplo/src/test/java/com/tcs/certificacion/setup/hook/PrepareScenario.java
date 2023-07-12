@@ -3,6 +3,8 @@ package com.tcs.certificacion.setup.hook;
 import com.tcs.certificacion.enums.Constants;
 import com.tcs.certificacion.enums.Environment;
 import io.cucumber.java.Before;
+import net.serenitybdd.core.annotations.events.AfterScenario;
+import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
@@ -23,5 +25,10 @@ public class PrepareScenario {
         OnStage.setTheStage(new OnlineCast());
         theActor(String.valueOf(ACTOR_NAME.getConstant()))
                 .whoCan(CallAnApi.at(Environment.getEnvironment(ambient)));
+    }
+
+    @AfterScenario
+    public void ResetSerenity() {
+        SerenityRest.reset();
     }
 }
