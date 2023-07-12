@@ -28,6 +28,7 @@ public class CreateEmployeeV2 implements Task {
                 Post.to(url)
                         .with(rq -> rq
                                 .header("Content-Type", "application/json; charset=utf-8")
+                                .relaxedHTTPSValidation()
                                 .body(body)
                         )
         );

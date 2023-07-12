@@ -6,7 +6,7 @@ import java.util.Map;
 
 public enum Environment {
     DEV("dev", "https://reqres.in"),
-    QA("quality", "https://reqres.in" ),
+    QA("qa", "https://reqres.in" ),
     PROD("pdn", "https://reqres.in");
 
     private final String key;

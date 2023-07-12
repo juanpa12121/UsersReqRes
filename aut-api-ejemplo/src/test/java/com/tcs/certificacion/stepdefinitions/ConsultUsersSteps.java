@@ -23,10 +23,10 @@ import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeT
 
 public class ConsultUsersSteps {
 
-    @Given("I can query the users api {string}")
-    public void iCanQueryTheUsersApi(String environment) {
-        theActorInTheSpotlight().whoCan(CallAnApi.at(Environment.getEnvironment(environment)));
-    }
+//    @Given("I can query the users api {string}")
+//    public void iCanQueryTheUsersApi(String environment) {
+//        theActorInTheSpotlight().whoCan(CallAnApi.at(Environment.getEnvironment(environment)));
+//    }
 
     @When("Querying user with id {int}")
     public void queryingUserWithId(int id) {

@@ -48,8 +48,9 @@ public class CreateEmployeeSteps {
     @When("I create the employee")
     public void iCreateTheEmployee() {
         //theActorInTheSpotlight().attemptsTo(CreateEmployee.create(name, job));
+
         theActorInTheSpotlight().attemptsTo(CreateBody.sendBody("template/create_employee.json", "create_employee", TestData.getDataTest()));
-        theActorInTheSpotlight().attemptsTo(CreateEmployeeV2.create("api/users", "create_employee"));
+        theActorInTheSpotlight().attemptsTo(CreateEmployeeV2.create("/api/users", "create_employee"));
     }
 
     //@createv3

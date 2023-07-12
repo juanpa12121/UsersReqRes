@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         glue = {"com.tcs.certificacion.stepdefinitions", "com.tcs.certificacion.setup.hook"},
         features = "src/test/resources/com/tcs/certificacion/features/create_employee.feature",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        tags = "@createv3",
+        tags = "@createv2",
         monochrome = true
 
 )
